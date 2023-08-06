@@ -1,23 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useTheme } from "next-themes";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const ThemeSwitcher = () => {
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const toggleDarkMode = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
 
-  if (!mounted) {
-    return null;
-  }
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
 
   return (
-    <div>
+    <div className={theme}>
       The current theme is: {theme}
-      <button onClick={() => setTheme("light")}>Light Mode</button>
-      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+      <DarkModeSwitch
+        style={{ marginBottom: "2rem" }}
+        className="h-6"
+        checked={theme === "dark"}
+        onChange={toggleDarkMode}
+        size={120}
+      />
     </div>
   );
 };

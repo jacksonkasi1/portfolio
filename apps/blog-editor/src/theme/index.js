@@ -1,16 +1,16 @@
 import { Providers } from "./providers";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useTheme } from "next-themes";
 
 export default function RootLayout({ children }) {
+  const { theme } = useTheme();
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={theme === "dark" ? "dark" : ""}>
       <body>
-        {/* <main className="dark text-foreground bg-background"> */}
         <Providers>
           <ThemeSwitcher />
           {children}
         </Providers>
-        {/* </main> */}
       </body>
     </html>
   );

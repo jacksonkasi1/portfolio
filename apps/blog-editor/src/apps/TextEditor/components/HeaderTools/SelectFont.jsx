@@ -19,7 +19,7 @@ const FontList = [
   "Ubuntu",
 ];
 
-export default function App() {
+export default function SelectFont() {
   const [selectedKeys, setSelectedKeys] = useState(
     new Set([FontList[0] + " "])
   );
@@ -33,8 +33,8 @@ export default function App() {
     <Dropdown>
       <DropdownTrigger>
         <Button
-          className="capitalize"
-          variant="shadow"
+          className="capitalize  dark:bg-theme-darker"
+          variant="ghost"
           color="default"
           radius="sm"
           endContent={<DownLineIco />}

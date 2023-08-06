@@ -1,33 +1,40 @@
 import React, { useState } from "react";
-import { Card, CardBody, Button, ButtonGroup } from "@nextui-org/react";
 
-function Counter() {
-  const [count, setCount] = useState(0);
+import Typography from "@shared/Typography";
+import Paper from "@shared/Paper";
+
+// ** import icons
+import PlusIco from "@icons/round-plus";
+import MinusIco from "@icons/round-minus";
+
+const Counter = () => {
+  const minValue = 10;
+  const [count, setCount] = useState(minValue);
 
   const increase = () => setCount(count + 1);
-  const decrease = () => setCount(count > 0 ? count - 1 : 0);
+  const decrease = () => setCount(count > minValue ? count - 1 : minValue);
 
   return (
-    <>
-      <ButtonGroup>
-        <Button color="primary" onClick={decrease}>
-          -
-        </Button>
-        <Button color="primary" onClick={decrease}>
-          {count}
-        </Button>
-
-        <Button color="primary" onClick={increase}>
-          +
-        </Button>
-      </ButtonGroup>
-      <Card>
-        <CardBody>
-          <p>Make beautiful websites regardless of your design experience.</p>
-        </CardBody>
-      </Card>
-    </>
+    <Paper className="flex items-center gap-x-1 max-w-fit rounded-lg p-[4px] border-2 dark:border-theme-dark-md bg-theme-lighter dark:bg-theme-darker">
+      <Paper
+        onClick={decrease}
+        className={"p-2 max-w-fit rounded-md bg-theme-light-sm"}
+        clickable
+      >
+        <MinusIco />
+      </Paper>
+      <Typography variant="P_Regular_H6" disableSelect>
+        {count}
+      </Typography>
+      <Paper
+        onClick={increase}
+        className={"p-2 max-w-fit rounded-md bg-theme-light-sm"}
+        clickable
+      >
+        <PlusIco />
+      </Paper>
+    </Paper>
   );
-}
+};
 
 export default Counter;
