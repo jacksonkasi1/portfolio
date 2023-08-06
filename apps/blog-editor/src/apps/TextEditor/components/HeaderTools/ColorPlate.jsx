@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import {
   Modal,
   ModalContent,
@@ -8,17 +7,26 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
 } from "@nextui-org/react";
 
+// ** import lib
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 
+// ** import shared components
 import Paper from "@shared/Paper";
 
+// ** import icons
 import PlusIco from "@icons/round-plus";
 
+// ** import tiptap extension
+import { Color } from "@tiptap/extension-color";
+
 let clrList = ["#FF4347", "#48D8DD", "#3878F9", "#f60869"];
-export default function ColorPlate() {
+export default function ColorPlate({ editor }) {
   const [colorList, setColorList] = useState(clrList);
   const [selectedColors, setSelectedColors] = useState(new Set([clrList[0]]));
   const [color, setColor] = useColor("#561ecb");
@@ -50,6 +58,11 @@ export default function ColorPlate() {
     });
   };
 
+  const handleSetColor = (colorHex) => {
+    setSelectedColors(new Set([colorHex]));
+    editor.chain().focus().setColor(colorHex).run();
+  };
+
   return (
     <>
       <Popover placement="bottom">
@@ -72,7 +85,7 @@ export default function ColorPlate() {
                 backgroundColor: i,
               }}
               clickable
-              onClick={() => setSelectedColors(new Set([i]))}
+              onClick={() => handleSetColor(i)}
             />
           ))}
           <Paper

@@ -4,15 +4,16 @@ import React from "react";
 import Animation from "@shared/Animation";
 
 // ** import components
-import HeaderTools from "./components/HeaderTools";
+import Content from "./Content";
 
 const TextEditor = () => {
   return (
     <Animation
       variant={"tb_opacity_transition"}
-      className="flex items-center gap-x-2"
+      className="flex flex-col gap-y-4 max-w-6xl mx-auto items-center gap-x-2"
     >
-      <HeaderTools />
+
+      <Content />
     </Animation>
   );
 };

@@ -10,7 +10,7 @@ import FontStyle from "./FontStyle";
 import TextPosition from "./TextPosition";
 import ColorPlate from "./ColorPlate";
 
-const HeaderTools = () => {
+const HeaderTools = ({ editor }) => {
   return (
     <Animation
       variant={"tb_opacity_transition"}
@@ -21,8 +21,8 @@ const HeaderTools = () => {
         <Counter />
       </div>
       <div className="flex items-center gap-x-2">
-        <FontStyle />
-        <ColorPlate />
+        <FontStyle editor={editor} />
+        <ColorPlate editor={editor} />
         <TextPosition />
       </div>
     </Animation>
