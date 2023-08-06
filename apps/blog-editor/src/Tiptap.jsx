@@ -1,9 +1,10 @@
 import { useCallback } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import style from "./TipTap.module.scss";
 import { Image } from "@tiptap/extension-image";
-import {Button} from '@nextui-org/button';
+import TextEditor from "./apps/TextEditor";
+// import {Button} from '@nextui-org/react';
+import {Button, ButtonGroup} from "@nextui-org/react";
 
 Image.configure({});
 
@@ -22,11 +23,11 @@ const TipTap = props => {
   if (!editor) return null;
 
   return (
-    <div className={style.tiptapContainer}>
+    <div>
       <h2>TipTap</h2>
       <div className="k-display-flex k-gap-2">
-        <Button onClick={() => editor.chain().focus().toggleBold().run()}>
-          B
+        <Button  onClick={() => editor.chain().focus().toggleBold().run()}>
+          B1
         </Button>
         <Button onClick={() => editor.chain().focus().toggleItalic().run()}>
           I
@@ -34,6 +35,7 @@ const TipTap = props => {
         <Button onClick={addImage}>Add Image</Button>
       </div>
       <EditorContent editor={editor} />
+      <TextEditor />
     </div>
   );
 };
