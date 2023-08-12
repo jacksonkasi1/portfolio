@@ -18,7 +18,7 @@ const Counter = () => {
     <Paper className="flex items-center gap-x-1 max-w-fit rounded-lg p-[4px] border-2 dark:border-theme-dark-md bg-theme-lighter dark:bg-theme-darker">
       <Paper
         onClick={decrease}
-        className={"p-2 max-w-fit rounded-md bg-theme-light-sm"}
+        className={"p-2 max-w-fit rounded-md bg-theme-light-sm dark:bg-theme-dark-lg"}
         clickable
       >
         <MinusIco />
@@ -28,7 +28,7 @@ const Counter = () => {
       </Typography>
       <Paper
         onClick={increase}
-        className={"p-2 max-w-fit rounded-md bg-theme-light-sm"}
+        className={"p-2 max-w-fit rounded-md bg-theme-light-sm dark:bg-theme-dark-lg"}
         clickable
       >
         <PlusIco />

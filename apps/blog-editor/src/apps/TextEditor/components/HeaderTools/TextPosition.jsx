@@ -11,19 +11,22 @@ const ALIGNMENT_OPTIONS = [
     id: "text-left",
     icon: <TextLIco />,
     action: "left",
-    isActive: (editor) => editor?.isActive && editor?.isActive({ textAlign: "left" }),
+    isActive: (editor) =>
+      editor?.isActive && editor?.isActive({ textAlign: "left" }),
   },
   {
     id: "text-center",
     icon: <TextCIco />,
     action: "center",
-    isActive: (editor) => editor?.isActive && editor?.isActive({ textAlign: "center" }),
+    isActive: (editor) =>
+      editor?.isActive && editor?.isActive({ textAlign: "center" }),
   },
   {
     id: "text-right",
     icon: <TextRIco />,
     action: "right",
-    isActive: (editor) => editor?.isActive && editor?.isActive({ textAlign: "right" }),
+    isActive: (editor) =>
+      editor?.isActive && editor?.isActive({ textAlign: "right" }),
   },
 ];
 
@@ -49,10 +52,18 @@ export default function TextPosition({ editor }) {
         {ALIGNMENT_OPTIONS.map(({ id, icon, action, isActive }) => (
           <Paper
             key={id}
-            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg dark:border-theme-dark-md bg-theme-lighter
-            ${isSelected(id) ? "dark:bg-theme-dark-xl border-1.5" : "dark:bg-theme-darker"}
+            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg border-1 border-transparent
+            ${
+              isSelected(id)
+                ? "bg-theme-light-sm dark:bg-theme-dark-lg"
+                : "bg-theme-lighter dark:bg-theme-darker"
+            }
+            ${
+              isActive && isActive(editor)
+                ? "!border-theme-light-lg !dark:border-theme-dark-xl"
+                : ""
+            }
             `}
-            // ${isActive && isActive(editor) ? "border-1 border-yellow-500 dark:border-indigo-500" : ""}
             clickable
             onClick={handleToolbarAction(id, action)}
           >

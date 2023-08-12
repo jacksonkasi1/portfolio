@@ -51,6 +51,8 @@ export default function FontStyle({ editor }) {
     }
   };
 
+  const isSelected = (option) => option === lastSelected;
+
   return (
     <div className="flex flex-wrap gap-4">
       <Paper
@@ -61,10 +63,18 @@ export default function FontStyle({ editor }) {
         {FONT_STYLE_OPTIONS.map(({ id, icon, action, isActive }) => (
           <Paper
             key={id}
-            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg dark:border-theme-dark-md bg-theme-lighter
-            ${lastSelected === id ? "dark:bg-theme-dark-xl border-1.5" : "dark:bg-theme-darker"}
+            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg border-1 border-transparent
+            ${
+              isSelected(id)
+                ? "bg-theme-light-sm dark:bg-theme-dark-lg"
+                : "bg-theme-lighter dark:bg-theme-darker"
+            }
+            ${
+              isActive && isActive(editor)
+                ? "!border-theme-light-lg !dark:border-theme-dark-xl"
+                : ""
+            }
             `}
-            // ${isActive && isActive(editor) ? "border-1 border-yellow-500 dark:border-indigo-500" : ""}
             clickable
             onClick={handleToolbarAction(id, action)}
           >
