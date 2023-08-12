@@ -23,7 +23,7 @@ const HeaderTools = ({ editor }) => {
       <div className="flex items-center gap-x-2">
         <FontStyle editor={editor} />
         <ColorPlate editor={editor} />
-        <TextPosition />
+        <TextPosition editor={editor} />
       </div>
     </Animation>
   );

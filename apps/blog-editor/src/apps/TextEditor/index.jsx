@@ -12,7 +12,6 @@ const TextEditor = () => {
       variant={"tb_opacity_transition"}
       className="flex flex-col gap-y-4 max-w-6xl mx-auto items-center gap-x-2"
     >
-
       <Content />
     </Animation>
   );

@@ -5,6 +5,9 @@ import TextBIco from "@icons/text-b";
 import UnderlineIco from "@icons/underline";
 import ItalicIco from "@icons/italic";
 import QuotesIco from "@icons/quotes";
+import StrikethroughIco from "@icons/strikethrough";
+
+// ** import components
 import Paper from "@shared/Paper";
 
 export default function FontStyle({ editor }) {
@@ -22,6 +25,9 @@ export default function FontStyle({ editor }) {
           break;
         case "quotes":
           editor.chain().focus().toggleBlockquote().run();
+          break;
+        case "strikethrough":
+          editor.chain().focus().toggleStrike().run();
           break;
         default:
           return;
@@ -71,6 +77,15 @@ export default function FontStyle({ editor }) {
           onClick={handleToolbarAction("quotes")}
         >
           <QuotesIco />
+        </Paper>
+        <Paper
+          className={
+            "flex items-center py-2 px-2.5 gap-2 rounded-lg border-1.5 dark:border-theme-dark-md bg-theme-lighter"
+          }
+          clickable
+          onClick={handleToolbarAction("strikethrough")}
+        >
+          <StrikethroughIco />
         </Paper>
       </Paper>
     </div>
