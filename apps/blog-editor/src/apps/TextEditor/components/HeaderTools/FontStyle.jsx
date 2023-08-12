@@ -9,15 +9,40 @@ import QuotesIco from "@icons/quotes";
 import StrikethroughIco from "@icons/strikethrough";
 
 const FONT_STYLE_OPTIONS = [
-  { id: "text-b", icon: <TextBIco />, action: "toggleBold" },
-  { id: "underline", icon: <UnderlineIco />, action: "toggleUnderline" },
-  { id: "italic", icon: <ItalicIco />, action: "toggleItalic" },
-  { id: "quotes", icon: <QuotesIco />, action: "toggleBlockquote" },
-  { id: "strikethrough", icon: <StrikethroughIco />, action: "toggleStrike" },
+  {
+    id: "text-b",
+    icon: <TextBIco />,
+    action: "toggleBold",
+    isActive: (editor) => editor?.isActive && editor?.isActive("bold"),
+  },
+  {
+    id: "underline",
+    icon: <UnderlineIco />,
+    action: "toggleUnderline",
+    isActive: (editor) => editor?.isActive && editor?.isActive("underline"),
+  },
+  {
+    id: "italic",
+    icon: <ItalicIco />,
+    action: "toggleItalic",
+    isActive: (editor) => editor?.isActive && editor?.isActive("italic"),
+  },
+  {
+    id: "quotes",
+    icon: <QuotesIco />,
+    action: "toggleBlockquote",
+    isActive: (editor) => editor?.isActive && editor?.isActive("blockquote"),
+  },
+  {
+    id: "strikethrough",
+    icon: <StrikethroughIco />,
+    action: "toggleStrike",
+    isActive: (editor) => editor?.isActive && editor?.isActive("strike"),
+  },
 ];
 
 export default function FontStyle({ editor }) {
-  const [lastSelected, setLastSelected] = useState('text-b');
+  const [lastSelected, setLastSelected] = useState("text-b");
 
   const handleToolbarAction = (id, action) => () => {
     if (editor && editor.chain) {
@@ -30,15 +55,16 @@ export default function FontStyle({ editor }) {
     <div className="flex flex-wrap gap-4">
       <Paper
         className={
-          "flex items-center py-1 px-1 gap-2 border-2 bg-theme-lighter dark:bg-black dark:border-theme-dark-md"
+          "flex items-center py-1 px-1 gap-2 border-2 bg-theme-lighter dark:bg-theme-darker dark:border-theme-dark-md"
         }
       >
-        {FONT_STYLE_OPTIONS.map(({ id, icon, action }) => (
+        {FONT_STYLE_OPTIONS.map(({ id, icon, action, isActive }) => (
           <Paper
             key={id}
-            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg dark:border-theme-dark-md bg-theme-lighter ${
-              lastSelected === id ? "border-1.5" : "border-none dark:bg-theme-darker"
-            }`}
+            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg dark:border-theme-dark-md bg-theme-lighter
+            ${lastSelected === id ? "dark:bg-theme-dark-xl border-1.5" : "dark:bg-theme-darker"}
+            `}
+            // ${isActive && isActive(editor) ? "border-1 border-yellow-500 dark:border-indigo-500" : ""}
             clickable
             onClick={handleToolbarAction(id, action)}
           >

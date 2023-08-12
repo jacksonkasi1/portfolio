@@ -10,6 +10,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 
 // ** import components
 import HeaderTools from "./components/HeaderTools";
+import Menu from "./components/OtherTools/Menu";
 
 const Content = ({ editor }) => {
   if (!editor) {
@@ -204,6 +205,7 @@ export default () => {
     <div>
       <HeaderTools editor={editor} />
       <Content editor={editor} />
+      <Menu editor={editor} />
       <EditorContent editor={editor} />
     </div>
   );
