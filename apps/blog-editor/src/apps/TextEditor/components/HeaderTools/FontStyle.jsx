@@ -1,37 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import Paper from "@shared/Paper";
 
-// ** import icons
+// Import icons
 import TextBIco from "@icons/text-b";
 import UnderlineIco from "@icons/underline";
 import ItalicIco from "@icons/italic";
 import QuotesIco from "@icons/quotes";
 import StrikethroughIco from "@icons/strikethrough";
 
-// ** import components
-import Paper from "@shared/Paper";
+const FONT_STYLE_OPTIONS = [
+  { id: "text-b", icon: <TextBIco />, action: "toggleBold" },
+  { id: "underline", icon: <UnderlineIco />, action: "toggleUnderline" },
+  { id: "italic", icon: <ItalicIco />, action: "toggleItalic" },
+  { id: "quotes", icon: <QuotesIco />, action: "toggleBlockquote" },
+  { id: "strikethrough", icon: <StrikethroughIco />, action: "toggleStrike" },
+];
 
 export default function FontStyle({ editor }) {
-  const handleToolbarAction = (selected) => () => {
+  const [lastSelected, setLastSelected] = useState('text-b');
+
+  const handleToolbarAction = (id, action) => () => {
     if (editor && editor.chain) {
-      switch (selected) {
-        case "text-b":
-          editor.chain().focus().toggleBold().run();
-          break;
-        case "underline":
-          editor.chain().focus().toggleUnderline().run();
-          break;
-        case "italic":
-          editor.chain().focus().toggleItalic().run();
-          break;
-        case "quotes":
-          editor.chain().focus().toggleBlockquote().run();
-          break;
-        case "strikethrough":
-          editor.chain().focus().toggleStrike().run();
-          break;
-        default:
-          return;
-      }
+      editor.chain().focus()[action]().run();
+      setLastSelected(id);
     }
   };
 
@@ -39,54 +30,21 @@ export default function FontStyle({ editor }) {
     <div className="flex flex-wrap gap-4">
       <Paper
         className={
-          "flex items-center py-1 px-1 gap-2 border-2 bg-theme-lighter dark:bg-theme-darker dark:border-theme-dark-md"
+          "flex items-center py-1 px-1 gap-2 border-2 bg-theme-lighter dark:bg-black dark:border-theme-dark-md"
         }
       >
-        <Paper
-          className={
-            "flex items-center py-2 px-2.5 gap-2 rounded-lg border-1.5 dark:border-theme-dark-md bg-theme-lighter"
-          }
-          clickable
-          onClick={handleToolbarAction("text-b")}
-        >
-          <TextBIco />
-        </Paper>
-        <Paper
-          className={
-            "flex items-center py-2 px-2.5 gap-2 rounded-lg border-1.5 dark:border-theme-dark-md bg-theme-lighter"
-          }
-          clickable
-          onClick={handleToolbarAction("underline")}
-        >
-          <UnderlineIco />
-        </Paper>
-        <Paper
-          className={
-            "flex items-center py-2 px-2.5 gap-2 rounded-lg border-1.5 dark:border-theme-dark-md bg-theme-lighter"
-          }
-          clickable
-          onClick={handleToolbarAction("italic")}
-        >
-          <ItalicIco />
-        </Paper>
-        <Paper
-          className={
-            "flex items-center py-2 px-2.5 gap-2 rounded-lg border-1.5 dark:border-theme-dark-md bg-theme-lighter"
-          }
-          clickable
-          onClick={handleToolbarAction("quotes")}
-        >
-          <QuotesIco />
-        </Paper>
-        <Paper
-          className={
-            "flex items-center py-2 px-2.5 gap-2 rounded-lg border-1.5 dark:border-theme-dark-md bg-theme-lighter"
-          }
-          clickable
-          onClick={handleToolbarAction("strikethrough")}
-        >
-          <StrikethroughIco />
-        </Paper>
+        {FONT_STYLE_OPTIONS.map(({ id, icon, action }) => (
+          <Paper
+            key={id}
+            className={`flex items-center py-2 px-2.5 gap-2 rounded-lg dark:border-theme-dark-md bg-theme-lighter ${
+              lastSelected === id ? "border-1.5" : "border-none dark:bg-theme-darker"
+            }`}
+            clickable
+            onClick={handleToolbarAction(id, action)}
+          >
+            {icon}
+          </Paper>
+        ))}
       </Paper>
     </div>
   );
