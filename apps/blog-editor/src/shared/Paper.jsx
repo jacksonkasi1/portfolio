@@ -7,7 +7,7 @@ const Paper = ({ className, children, clickable = false, ...props }) => {
       className={`p-2 bg-theme-light-sm dark:bg-theme-dark-sm  rounded-md ${
         clickable ? "cursor-pointer" : "cursor-default"
       } ${className}`}
-      whileHover={clickable ? { scale: 1.01 } : null}
+      whileHover={clickable ? { scale: 1.05 } : null}
       whileTap={clickable ? { scale: 0.98 } : null}
       {...props}
     >
