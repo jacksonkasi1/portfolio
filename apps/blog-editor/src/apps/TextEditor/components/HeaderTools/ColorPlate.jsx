@@ -22,9 +22,6 @@ import Paper from "@shared/Paper";
 // ** import icons
 import PlusIco from "@icons/round-plus";
 
-// ** import tiptap extension
-import { Color } from "@tiptap/extension-color";
-
 let clrList = ["#FF4347", "#48D8DD", "#3878F9", "#f60869"];
 export default function ColorPlate({ editor }) {
   const [colorList, setColorList] = useState(clrList);

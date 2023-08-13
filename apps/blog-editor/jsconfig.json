@@ -3,7 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@icons/*": ["./src/assets/Icons/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@shared/*": ["./src/shared/*"],
+      "@hooks/*": ["src/lib/hooks/*"],
+      "@utils/*": ["src/lib/utils/*"]
     }
   }
 }
